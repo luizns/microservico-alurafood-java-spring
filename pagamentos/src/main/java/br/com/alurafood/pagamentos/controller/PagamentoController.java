@@ -22,7 +22,7 @@ public class PagamentoController {
     private PagamentoService service;
 
     @GetMapping
-    public Page<PagamentoDTO> listar(@PageableDefault(size = 10) Pageable paginacao) {
+    public Page<PagamentoDTO> listar(@PageableDefault() Pageable paginacao) {
         return service.obterTodos(paginacao);
     }
 
@@ -41,7 +41,7 @@ public class PagamentoController {
         return ResponseEntity.created(endereco).body(pagamento);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<PagamentoDTO> atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid PagamentoDTO dto) {
         PagamentoDTO atualizado = service.atualizarPagamento(id, dto);
         return ResponseEntity.ok(atualizado);
